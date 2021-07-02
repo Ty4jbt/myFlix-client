@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import config from '../../config';
+import { Link } from 'react-router-dom';
  
 export function ProfileView(props) {
     const [username, setUsername] = useState('');
@@ -54,6 +55,9 @@ export function ProfileView(props) {
                     Submit
                 </Button>  
             </Form>
+            <Link to={`/`}>
+                <Button variant='primary'>Back</Button>
+            </Link>
             <h2>Favorite Movies</h2>
             {props.favoriteMovies.map((m) => <MovieCard key={m._id} movie={m} />)}
             <Button variant='danger'>Deregister</Button>

@@ -36987,8 +36987,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var config = {
-  // APIURL: 'https://boemyflix.herokuapp.com',
-  APIURL: 'http://localhost:8001'
+  APIURL: 'https://boemyflix.herokuapp.com' // APIURL: 'http://localhost:8001'
+
 };
 var _default = config;
 exports.default = _default;
@@ -51502,6 +51502,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _config = _interopRequireDefault(require("../../config"));
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -51590,7 +51592,11 @@ function ProfileView(props) {
     variant: "success",
     type: "submit",
     onClick: updateUserInfo
-  }, "Submit")), /*#__PURE__*/_react.default.createElement("h2", null, "Favorite Movies"), props.favoriteMovies.map(function (m) {
+  }, "Submit")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, /*#__PURE__*/_react.default.createElement(_Button.default, {
+    variant: "primary"
+  }, "Back")), /*#__PURE__*/_react.default.createElement("h2", null, "Favorite Movies"), props.favoriteMovies.map(function (m) {
     return /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
       key: m._id,
       movie: m
@@ -51599,7 +51605,7 @@ function ProfileView(props) {
     variant: "danger"
   }, "Deregister"));
 }
-},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","../../config":"config.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","../../config":"config.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52092,7 +52098,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63948" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50595" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
