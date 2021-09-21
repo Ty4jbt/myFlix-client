@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 };
 
 function MoviesList(props) {
-    const { movies, visibilityFilter, user } = props;
+    const { movies, visibilityFilter, user, userData, addFavoriteToUserData, removeFavoriteFromUserData } = props;
     let filteredMovies = movies;
 
     if (visibilityFilter !== '') {
@@ -29,9 +29,9 @@ function MoviesList(props) {
                 <MovieCard 
                     user={user}
                     userData={userData}
-                    addFavoriteToUserData={this.addFavoriteToUserData}
-                    removeFavoriteFromUserData={this.removeFavoriteFromUserData}
-                    movies={m} 
+                    addFavoriteToUserData={addFavoriteToUserData}
+                    removeFavoriteFromUserData={removeFavoriteFromUserData}
+                    movie={m} 
                 />
             </Col>
         ))}

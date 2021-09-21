@@ -29826,7 +29826,7 @@ const mapStateToProps = (state)=>{
     };
 };
 function MoviesList(props) {
-    const { movies , visibilityFilter  } = props;
+    const { movies , visibilityFilter , user , userData , addFavoriteToUserData , removeFavoriteFromUserData  } = props;
     let filteredMovies = movies;
     if (visibilityFilter !== '') filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
     );
@@ -29869,9 +29869,9 @@ function MoviesList(props) {
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
                         user: user,
                         userData: userData,
-                        addFavoriteToUserData: this.addFavoriteToUserData,
-                        removeFavoriteFromUserData: this.removeFavoriteFromUserData,
-                        movies: m,
+                        addFavoriteToUserData: addFavoriteToUserData,
+                        removeFavoriteFromUserData: removeFavoriteFromUserData,
+                        movie: m,
                         __source: {
                             fileName: "src/components/movies-list/movies-list.jsx",
                             lineNumber: 29
@@ -31448,7 +31448,6 @@ function LoginView(props) {
             Password: password
         }).then((response)=>{
             const data = response.data;
-            console.log(data);
             props.onLoggedIn(data);
         }).catch((e1)=>{
             console.log('no such user');
@@ -31457,7 +31456,7 @@ function LoginView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 28
+            lineNumber: 27
         },
         __self: this,
         children: [
@@ -31465,14 +31464,14 @@ function LoginView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 29
+                    lineNumber: 28
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 30
+                            lineNumber: 29
                         },
                         __self: this,
                         children: "Username:"
@@ -31484,7 +31483,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 31
+                            lineNumber: 30
                         },
                         __self: this
                     })
@@ -31494,14 +31493,14 @@ function LoginView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 34
+                    lineNumber: 33
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 35
+                            lineNumber: 34
                         },
                         __self: this,
                         children: "Password:"
@@ -31513,7 +31512,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 36
+                            lineNumber: 35
                         },
                         __self: this
                     })
@@ -31525,7 +31524,7 @@ function LoginView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 39
+                    lineNumber: 38
                 },
                 __self: this,
                 children: "Submit"
@@ -31535,7 +31534,7 @@ function LoginView(props) {
                 onClick: props.toggleRegister,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 42
+                    lineNumber: 41
                 },
                 __self: this,
                 children: "New User"
@@ -31576,15 +31575,6 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _config = require("../../config");
 var _configDefault = parcelHelpers.interopDefault(_config);
 class MovieView extends _reactDefault.default.Component {
-    keypressCallback(event) {
-        console.log(event.key);
-    }
-    componentDidMount() {
-        document.addEventListener('keypress', this.keypressCallback);
-    }
-    componentWillUnmount() {
-        document.removeEventListener('keypress', this.keypressCallback);
-    }
     addToFavs = ()=>{
         _axiosDefault.default.post(`${_configDefault.default.APIURL}/users/${this.props.user}/movies/${this.props.movie._id}`, {
         }, {
@@ -31603,7 +31593,7 @@ class MovieView extends _reactDefault.default.Component {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then((result)=>{
-            console.log(result);
+            // console.log(result);
             this.props.removeFavoriteFromUserData(this.props.movie._id);
         }).catch((e)=>{
             console.error(e);
@@ -31615,7 +31605,7 @@ class MovieView extends _reactDefault.default.Component {
             className: "movie-view",
             __source: {
                 fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 56
+                lineNumber: 44
             },
             __self: this,
             children: [
@@ -31623,14 +31613,14 @@ class MovieView extends _reactDefault.default.Component {
                     className: "movie-poster",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 57
+                        lineNumber: 45
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
                         src: `/img/${movie.ImagePath}`,
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 58
+                            lineNumber: 46
                         },
                         __self: this
                     })
@@ -31639,7 +31629,7 @@ class MovieView extends _reactDefault.default.Component {
                     className: "movie-title",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 60
+                        lineNumber: 48
                     },
                     __self: this,
                     children: [
@@ -31647,7 +31637,7 @@ class MovieView extends _reactDefault.default.Component {
                             className: "label",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 61
+                                lineNumber: 49
                             },
                             __self: this,
                             children: "Title: "
@@ -31656,7 +31646,7 @@ class MovieView extends _reactDefault.default.Component {
                             className: "value",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 62
+                                lineNumber: 50
                             },
                             __self: this,
                             children: movie.Title
@@ -31667,7 +31657,7 @@ class MovieView extends _reactDefault.default.Component {
                     className: "movie-description",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 64
+                        lineNumber: 52
                     },
                     __self: this,
                     children: [
@@ -31675,7 +31665,7 @@ class MovieView extends _reactDefault.default.Component {
                             className: "label",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 65
+                                lineNumber: 53
                             },
                             __self: this,
                             children: "Description: "
@@ -31684,7 +31674,7 @@ class MovieView extends _reactDefault.default.Component {
                             className: "value",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 66
+                                lineNumber: 54
                             },
                             __self: this,
                             children: movie.Description
@@ -31695,14 +31685,14 @@ class MovieView extends _reactDefault.default.Component {
                     to: `/directors/${movie.Director.Name}`,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 68
+                        lineNumber: 56
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 69
+                            lineNumber: 57
                         },
                         __self: this,
                         children: "Director"
@@ -31712,14 +31702,14 @@ class MovieView extends _reactDefault.default.Component {
                     to: `/genres/${movie.Genre.Name}`,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 71
+                        lineNumber: 59
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 72
+                            lineNumber: 60
                         },
                         __self: this,
                         children: "Genre"
@@ -31729,14 +31719,14 @@ class MovieView extends _reactDefault.default.Component {
                     to: `/`,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 74
+                        lineNumber: 62
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "primary",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 75
+                            lineNumber: 63
                         },
                         __self: this,
                         children: "Back"
@@ -31747,7 +31737,7 @@ class MovieView extends _reactDefault.default.Component {
                     onClick: this.addToFavs,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 77
+                        lineNumber: 65
                     },
                     __self: this,
                     children: "Add to Favorites"
@@ -31757,7 +31747,7 @@ class MovieView extends _reactDefault.default.Component {
                     onClick: this.removeFromFavs,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 78
+                        lineNumber: 66
                     },
                     __self: this,
                     children: "Remove from Favorites"
@@ -42259,7 +42249,7 @@ function RegistrationView(props) {
     const [birthdate, setBirthdate] = _react.useState('');
     const handleRegister = (e)=>{
         e.preventDefault();
-        console.log(username, password, email, birthdate);
+        // console.log(username, password, email, birthdate);
         _axiosDefault.default.post(`${_configDefault.default.APIURL}/users`, {
             Username: username,
             Password: password,
@@ -42267,7 +42257,7 @@ function RegistrationView(props) {
             Birthdate: birthdate
         }).then((response)=>{
             const data = response.data;
-            console.log(data);
+        // console.log(data);
         // window.open('/', '_self');
         }).catch((e1)=>{
             console.log('error registering the user');
@@ -42650,7 +42640,7 @@ function ProfileView(props) {
             }
         }).then((response)=>{
             const data = response.data;
-            console.log(data);
+            // console.log(data);
             // window.open('/', '_self');
             localStorage.setItem('user', username);
             props.updateLocalUserData({
@@ -42670,7 +42660,7 @@ function ProfileView(props) {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then((response)=>{
-            console.log(response);
+            // console.log(response);
             console.log(`${props.user} has been deleted`);
             // window.open('/', '_self');
             props.onLoggedOut();

@@ -25,7 +25,7 @@ export function ProfileView(props) {
         })
         .then(response => {
             const data = response.data;
-            console.log(data);
+            // console.log(data);
             // window.open('/', '_self');
             localStorage.setItem('user', username);
             props.updateLocalUserData({
@@ -47,7 +47,7 @@ export function ProfileView(props) {
 
         })
         .then(response => {
-            console.log(response);
+            // console.log(response);
             console.log(`${props.user} has been deleted`);
             // window.open('/', '_self');
             props.onLoggedOut()
